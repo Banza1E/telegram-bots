@@ -92,6 +92,8 @@ def game(update: Update, context: CallbackContext):  # callback
     tag = morph.parse(my_word)[0]
     secret_word = context.user_data['word']  # достаем из рюкзака
     mark_up = [[SURR]]
+    if my_word == SURR:
+        return surr(update, context)
     if len(secret_word) != len(my_word) and not my_word.isalpha():
         update.message.reply_text("Неверный ввод данных!")
         return
@@ -111,7 +113,7 @@ def game(update: Update, context: CallbackContext):  # callback
         resize_keyboard=True,
         input_field_placeholder=f'Нажмите кнопку {SURR}, чтобы сдаться.'
     )
-    update.message.reply_text(f'В вашем слове {cows} коров и {bulls} быков')
+    update.message.reply_text(f'В вашем слове {cows} коров и {bulls} быков', reply_markup=keyboard)
 
     if bulls == len(secret_word):
         update.message.reply_text('Вы угадали! Вы красавчик')
