@@ -1,9 +1,13 @@
 from telegram.ext import (
     Updater,
     ConversationHandler,
-    CommandHandler
+    CommandHandler,
+    Filters,
+    MessageHandler
 )
-from function import *
+from firework import *
+from interupt import *
+from start_menu import *
 from config import TOKEN
 
 updater = Updater(TOKEN)
@@ -12,9 +16,10 @@ dispatcher = updater.dispatcher
 conv_handler = ConversationHandler(
     entry_points=[CommandHandler('start', start)],
     states={
-        GAME: [MessageHandler(Filters.text & ~Filters.command, game)]
+        MENU: [MessageHandler(Filters.text & ~Filters.command, get_menu)],
+        ACTION: [MessageHandler(Filters.text & ~Filters.command, wrong_message)]
     },
-    fallbacks=[CommandHandler('end', end)]
+    fallbacks=[CommandHandler('end', cancel)]
 )
 dispatcher.add_handler(conv_handler)
 

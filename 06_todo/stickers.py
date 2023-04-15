@@ -1,0 +1,1 @@
+start_sticker = 'CAACAgIAAxkBAAIXzmQxjaO4-PtYZHeRTSckfb9XmWf4AAL6EQAC-ZTJS1SjJBtDn_RcLwQ'
